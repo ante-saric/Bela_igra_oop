@@ -36,8 +36,9 @@ Projekt prati definirani backlog i uključuje sljedeće komponente:
     ```bash
     ./Bela.exe
     ```
-4.  [cite_start]**Kontrole**: Kada dođe vaš red, unesite broj (indeks) karte iz svoje ruke prikazane na ekranu[cite: 76].
+4.  **Kontrole**: Kada dođe vaš red, unesite broj (indeks) karte iz svoje ruke prikazane na ekranu.
 
 ## Bilješke o implementaciji
 
-[cite_start]AI igrači trenutno koriste logiku nasumičnog odabira karte radi demonstracije osnovnog tijeka igre[cite: 28]. [cite_start]Bodovanje uzima u obzir povećanu vrijednost Dečka i Devetke u adut boji[cite: 62].
+AI igrači trenutno koriste logiku nasumičnog odabira karte radi demonstracije osnovnog tijeka igre. Bodovanje uzima u obzir povećanu vrijednost Dečka i Devetke u adut boji.
+
