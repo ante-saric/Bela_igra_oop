@@ -182,22 +182,57 @@ public:
     RacunaloIgrac(string i) : Igrac(i) {}
 
     Karta igrajKartu(bool prvi, Boja trazena, Boja adut) override {
-        int index = 0;
+        int index = -1;
 
-        if (!prvi) {
-            if (imaBoju(trazena)) {
-                for (int i = 0; i < ruka.size(); i++) {
-                    if (ruka[i].boja == trazena) {
-                        index = i;
-                        break;
-                    }
+        if (prvi) {
+            index = 0;
+            for (int i = 1; i < ruka.size(); i++) {
+                if (ruka[i].dohvatiSnagu(adut, ruka[i].boja) <
+                    ruka[index].dohvatiSnagu(adut, ruka[index].boja)) {
+                    index = i;
                 }
             }
+        }
+        else {
+            vector<int> dozvoljene;
+
+            if (imaBoju(trazena)) {
+                for (int i = 0; i < ruka.size(); i++)
+                    if (ruka[i].boja == trazena)
+                        dozvoljene.push_back(i);
+            }
             else if (imaAdut(adut)) {
-                for (int i = 0; i < ruka.size(); i++) {
-                    if (ruka[i].boja == adut) {
+                for (int i = 0; i < ruka.size(); i++)
+                    if (ruka[i].boja == adut)
+                        dozvoljene.push_back(i);
+            }
+            else {
+                for (int i = 0; i < ruka.size(); i++)
+                    dozvoljene.push_back(i);
+            }
+
+            int snagaNaStolu = -1000;
+
+            int najboljaZaPobjedu = -1;
+            int minSnagaZaPobjedu = 100000;
+
+            for (int i : dozvoljene) {
+                int s = ruka[i].dohvatiSnagu(adut, trazena);
+                if (s > snagaNaStolu && s < minSnagaZaPobjedu) {
+                    minSnagaZaPobjedu = s;
+                    najboljaZaPobjedu = i;
+                }
+            }
+
+            if (najboljaZaPobjedu != -1) {
+                index = najboljaZaPobjedu;
+            }
+            else {
+                index = dozvoljene[0];
+                for (int i : dozvoljene) {
+                    if (ruka[i].dohvatiSnagu(adut, trazena) <
+                        ruka[index].dohvatiSnagu(adut, trazena)) {
                         index = i;
-                        break;
                     }
                 }
             }
